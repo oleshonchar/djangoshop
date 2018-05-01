@@ -15,11 +15,15 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from main import views
+from django.conf.urls.static import static
+from django.conf import settings
 
 admin.autodiscover()
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    # url(r'^', include('orders.urls')),
-    # url(r'^', include('products.urls')),
-]
+    url(r'^$',  views.main, name='main'),
+] \
+    + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
+    + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
