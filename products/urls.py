@@ -13,19 +13,9 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url, include
-from django.contrib import admin
-from main import views
-from django.conf.urls.static import static
-from django.conf import settings
-
-admin.autodiscover()
+from django.conf.urls import url
+from products import views
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^$',  views.main, name='main'),
-    url(r'^', include('products.urls')),
-    #todo: добавить урл из продактс
-] \
-    + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
-    + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    url(r'^product/(?P<product_id>\w+)/$',  views.product, name='product'),
+]

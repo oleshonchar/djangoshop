@@ -4,30 +4,35 @@
 
 {% block content %}
 
-<section class="content">
-    <div class="new-arrivals-container">
-        <h3>Новые поступления</h3>
-        <div class="product-container">
-            {% for product_image in products_images %}
-            <div class="product">
-                <div class="product-img">
-                    <img src="{{ product_image.image.url }}" alt="Фотография {{ product_image.product.name }}">
-                </div>
-                <div class="product-name">
-                    <h6>{{ product_image.product.name }}</h6>
-                </div>
-                <div class="product-description">
-                    <p>{{ product_image.product.description|truncatechars_html:70 }}</p>
-                </div>
-                <div class="product-price">
-                    <span>{{ product_image.product.price }} UAH</span>
-                </div>
-                <button class="btn btn-secondary">Добавить в корзину</button>
-            </div>
-            {% endfor %}
+    <section class="content">
 
+        <div class="main-container new-arrivals-container">
+            <h3>Новые поступления</h3>
+            <div class="product-container">
+                {% for product_image in products_images %}
+                    {% include 'main/product_item.html' %}
+                {% endfor %}
+            </div>
         </div>
-    </div>
-</section>
+
+        <div class="main-container phones-container">
+            <h3>Телефоны</h3>
+            <div class="product-container">
+                {% for product_image in products_images_phones %}
+                    {% include 'main/product_item.html' %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="main-container laptops-container">
+            <h3>Ноутбуки</h3>
+            <div class="product-container">
+                {% for product_image in products_images_laptops %}
+                    {% include 'main/product_item.html' %}
+                {% endfor %}
+            </div>
+        </div>
+
+    </section>
 
 {% endblock %}
