@@ -8,7 +8,9 @@
 
         <div class="photo-container">
             {% for image_item in product.productimage_set.all %}
-                <img src="{{ image_item.image.url }}">
+                <div class="image-wrapper">
+                    <img src="{{ image_item.image.url }}">
+                </div>
             {% endfor %}
         </div>
         <div class="info-container">
@@ -18,8 +20,14 @@
             <div class="product-card-price">
                 <h1><span class="badge badge-secondary">{{ product.price }}</span> UAH</h1>
             </div>
-            <button class="product-card-buy btn btn-outline-warning btn-lg">КУПИТЬ</button>
-
+            <form id="form_buying_product" class="form-inline" action="{% url 'basket_adding' %}">{% csrf_token %}
+                <div class="form-group">
+                    <input type="number" id="number" class="form-control">
+                    <button type="submit" id="submit_btn" data-product_id="{{ product.id }}"
+                            data-product_name="{{ product.name }}" data-product_price="{{ product.price }}"
+                            class="product-card-buy btn btn-outline-warning">КУПИТЬ</button>
+                </div>
+            </form>
             {% include 'products/tabs.html' %}
         </div>
 

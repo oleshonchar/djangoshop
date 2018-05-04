@@ -1,18 +1,21 @@
 <section class="navbar">
     <div class="pos-f-t w-100">
         <div class="collapse" id="navbarToggleExternalContent">
-            <ul class="nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Домой</a>
-                </li>
-            </ul>
+            <span>...</span>
         </div>
         <nav class="navbar navbar-dark bg-dark">
-            <button class="navbar-toggler" type="button" data-toggle="collapse"
+            <button class="button navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <div class="button-container">
+                <a href="/" class="button button-home navbar-toggler"><i class="fa fa-home"></i></a>
+                <div class="basket-container">
+                    <span class="basket-notification">{{ product_total_nmb }}</span>
+                    <a href="#" class="button button-basket navbar-toggler"><i class="fa fa-shopping-basket"></i></a>
+                </div>
+            </div>
         </nav>
     </div>
 </section>

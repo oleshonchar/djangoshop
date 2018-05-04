@@ -3,12 +3,60 @@ section.navbar {
     border-bottom: 1px solid rgba(255,255,255,.1);
 }
 
+.navbar {
+    display: flex;
+    justify-content: flex-start;
+}
+.button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 40px;
+    width: 95%;
+    margin: 0;
+    padding: 0;
+    padding-right: 100px;
+}
+
+.button {
+    color: rgba(255,255,255,.5);
+    border-color: rgba(255,255,255,.1);
+    margin-left: 5px;
+    transition: all 0.4s;
+}
+
+.button-container a {
+    display: flex;
+    font-size: 30px;
+    align-items: center;
+    height: 40px;
+}
+
+
+.button:hover {
+    border-color: rgba(255,255,255,.3);
+    color: rgba(255,255,255,.7);
+    transition: all 0.4s;
+}
+
+html,
 body {
+  height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
     background-color: #343a40;
     color: #fff;
 }
 
+.wrapper {
+    flex: 1 0 auto;
+}
+
 footer {
+    flex: 0 0 auto;
     height: 56px;
     background-color: #343a40;
     color: #fff;
@@ -88,38 +136,81 @@ footer {
     color: black;
 }
 
+.basket-container {
+    display: flex;
+    position: relative;
+}
+
+.basket-notification {
+    display: none;
+    border: 2px solid red;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    position: absolute;
+    right: -35px;
+    top: 5px;
+    text-align: center;
+    padding: 4px 2px 5px 0;
+    font-size: 12px;
+    font-weight: bold;
+    opacity: .9;
+}
+
 /*product.html*/
 
 .product-card {
     display: flex;
-    margin: 50px 0;
+    height: 400px;
+    margin: 100px 0 50px 0;
 }
 
 .photo-container {
     display: flex;
     justify-content: center;
-    width: 40%;
+    width: 50%;
+}
+
+.image-wrapper {
+    width: 90%;
+    background-color: #fff;
+    opacity: .7;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .photo-container img {
     max-height: 360px;
-    max-width: 500px;
+    z-index: 2;
+    opacity: initial;
 }
 
 .info-container {
-    width: 60%;
-}
-
-.product-card-buy {
-    margin-bottom: 35px;
+    width: 50%;
 }
 
 .product-card-price {
-    margin-bottom: 70px;
+    margin-bottom: 40px;
 }
 
 .tab-content {
     width: 60%;
     color: silver;
+}
+
+#form_buying_product {
+    margin-bottom: 104px;
+}
+
+.nav-description {
+    margin-right: 7px;
+}
+
+#form_buying_product .form-control {
+    width: 80px;
+    margin-right: 10px;
+
 }
 
