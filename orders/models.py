@@ -1,6 +1,7 @@
 from django.db import models
 from products.models import Product
 from django.db.models.signals import post_save
+from django.contrib.auth.models import User
 
 
 class Status(models.Model):
@@ -18,6 +19,7 @@ class Status(models.Model):
 
 
 class Order(models.Model):
+    user = models.ForeignKey(User, blank=True, null=True, default=None, on_delete=models.CASCADE)
     customer_name = models.CharField(max_length=64, blank=True, null=True, default=None)
     customer_email = models.EmailField(blank=True, null=True, default=None)
     customer_phone = models.CharField(max_length=48, blank=True, null=True, default=None)
@@ -56,7 +58,7 @@ class ProductInOrder(models.Model):
     def save(self, *args, **kwargs):
         price_per_item = self.product.price
         self.price_per_item = price_per_item
-        self.total_price = self.nmb * price_per_item
+        self.total_price = int(self.nmb) * price_per_item
 
         super(ProductInOrder, self).save(*args, **kwargs)
 
