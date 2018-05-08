@@ -4,63 +4,95 @@
 {% block content %}
     <section class="basket">
         {% if product_in_basket %}
-            <div class="basket-container main-container">
+            <div class="main-container">
                 <h3>Корзина</h3>
+                <div class="basket-container">
+                    <form id="basket-form" method="post">{% csrf_token %}
+
+                        <div class="client-info">
+                            <label>Имя</label>
+                            <span class="form-error">{{ form.name.errors }}</span>
+                            <input type="text" class="form-control" name="{{ form.name.html_name }}"
+                                   value="{{ request.POST.name }}" required>
+
+                            <label>Телефон</label>
+                            <span class="form-error">{{ form.phone.errors }}</span>
+                            <input type="number" class="form-control" name="{{ form.phone.html_name }}"
+                                   value="{{ request.POST.phone }}" required>
+
+                            <label>Электронная почта</label>
+                            <span class="form-error">{{ form.email.errors }}</span>
+                            <input type="email" class="form-control" name="{{ form.email.html_name }}"
+                                   value="{{ request.POST.email }}">
+
+                            <label>Адрес доставки</label>
+                            <span class="form-error">{{ form.address.errors }}</span>
+                            <input type="text" class="form-control" name="{{ form.address.html_name }}"
+                                   value="{{ request.POST.address }}" required>
+
+                            <label>Коментарий</label>
+                            <span class="form-error">{{ form.comment.errors }}</span>
+                            <textarea class="form-control" name="{{ form.comment.html_name }}"
+                                      placeholder="{{ request.POST.comment }}"></textarea>
+                        </div>
+
+                        <div class="product-table">
+                            <table class="table table-center">
+                                <thead>
+                                <tr>
+                                    <th>Название товара</th>
+                                    <th>Количество</th>
+                                    <th>Цена за еденицу</th>
+                                    <th>Общая цена</th>
+                                    <th class="text-center">Удалить</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for product_in_basket in products_in_basket %}
+                                    <tr>
+                                        <td>
+                                            {{ product_in_basket.product.name }}
+                                        </td>
+                                        <td>
+                                            <input type="number" class="product-in-basket-nmb form-control"
+                                                   name="product_in_basket_{{ product_in_basket.id }}"
+                                                   value="{{ product_in_basket.nmb }}">
+                                        </td>
+                                        <td class="product-price">
+                                            {{ product_in_basket.price_per_item }}
+                                        </td>
+                                        <td class="product-total-price">
+                                            {{ product_in_basket.total_price }}
+                                        </td>
+                                        <td class="text-center">
+                                            <span class="button button-delete-product"
+                                                  data-product_id="{{ product_in_basket.product_id }}"><i class="fa fa-times-circle"></i></span>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                            <div class="basket-total-container">
+                                <div><span>Сумма заказа: </span><span
+                                        id="total-basket-amount"><b>{{ total_basket_amount }}</b></span><span> UAH</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="button-bar">
+                            <button type="button" id="onward-button"
+                                    class="btn btn-lg btn-success btn-secondary">Подтверждаю</button>
+                            <button id="confirm-button" class="btn btn-lg btn-success none">Оформить</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <form method="post">{% csrf_token %}
-
-                <label>Имя</label>
-                <span class="form-error">{{ form.name.errors }}</span>
-                <input type="text" class="form-control" name="{{ form.name.html_name }}" value="{{ request.POST.name }}">
-
-                <label>Телефон</label>
-                <span class="form-error">{{ form.phone.errors }}</span>
-                <input type="number" class="form-control" name="{{ form.phone.html_name }}" value="{{ request.POST.phone }}">
-
-                <table class="table table-center">
-                    <thead>
-                        <tr>
-                            <th>Название товара</th>
-                            <th>Количество</th>
-                            <th>Цена за еденицу</th>
-                            <th>Общая цена</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        {% for product_in_basket in products_in_basket %}
-                            <tr>
-                                <td>
-                                    {{ product_in_basket.product.name }}
-                                </td>
-                                <td>
-                                    <input type="number" class="product-in-basket-nmb form-control" name="product_in_basket_{{ product_in_basket.id }}" value="{{ product_in_basket.nmb }}">
-                                </td>
-                                <td class="product-price">
-                                    {{ product_in_basket.price_per_item }}
-                                </td>
-                                <td class="product-total-price">
-                                    {{ product_in_basket.total_price }}
-                                </td>
-                            </tr>
-                        {% endfor %}
-
-                    </tbody>
-                </table>
-
-                <div>
-                    <b>Сумма заказа</b><span id="total-basket-amount">{{ total_basket_amount }}</span>
-                </div>
-
-                <div>
-                    <button type="submit" class="btn btn-lg btn-success">Заказать</button>
-                </div>
-            </form>
         {% else %}
-            <div class="basket-container main-container">
+            <div class="main-container">
                 <h3>В вашей корзине нет товаров</h3>
             </div>
         {% endif %}
-
     </section>
 {% endblock %}
+
+
+

@@ -117,26 +117,21 @@ footer {
     margin-top: auto;
 }
 
-.product button {
-    margin: 10px auto 0 auto;
-    width: 200px;
-}
-
 .product-discount {
     width: 52px;
     border-radius: 50%;
-    background-color: #ffc107;
-    border-color: #ffc107;
-    box-shadow: 0 0 0 0.2rem rgba(255,193,7,.5);
+    background-color: #28a745;
+    border-color: #28a745;
+    box-shadow: 0 0 0 0.2rem rgba(40,167,69,.5);
     line-height: 52px;
     position: absolute;
     right: 28px;
     top: 28px;
     font-size: 20px;
-    color: black;
+    color: #fff;
 }
 
-.basket-container {
+.basket-button-container {
     display: flex;
     position: relative;
 }
@@ -204,13 +199,75 @@ footer {
     margin-bottom: 104px;
 }
 
+input#number {
+    width: 70px;
+    margin-right: 7px;
+}
+
 .nav-description {
     margin-right: 7px;
 }
 
-#form_buying_product .form-control {
-    width: 80px;
-    margin-right: 10px;
-
+.main_form_buying_product .form-group {
+    margin-top: 10px;
+    margin-bottom: 0;
 }
 
+/*checkout.html*/
+
+.table thead th {
+    border-bottom: 3px solid rgba(255, 255, 255, .1);
+    color: rgba(255,255,255,.5);
+}
+
+.table td, .table th {
+    border-top: 3px solid rgba(255,255,255,.1);
+}
+
+.basket-container {
+    width: 75%;
+    margin: auto;
+    margin-top: 32px;
+}
+
+.table tbody {
+    font-size: 22px;
+}
+
+#form_user_phone,
+#form_user_name {
+    width: 250px;
+}
+
+.product-in-basket-nmb {
+    width: 100px;
+}
+
+.basket-total-container {
+    display: flex;
+    align-items: center;
+    font-size: 27px;
+    justify-content: space-between;
+}
+
+.client-info {
+    display: none;
+}
+
+.button-bar {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.none {
+    display: none;
+}
+
+.inline {
+     display: inline;
+ }
+
+.button-delete-product {
+    cursor: pointer;
+}

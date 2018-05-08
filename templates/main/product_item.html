@@ -18,5 +18,13 @@
     <div class="product-price">
         <span>{{ product_image.product.price }} UAH</span>
     </div>
-    <button class="btn btn-secondary">Добавить в корзину</button>
+
+    <form class="main_form_buying_product" action="{% url 'basket_adding' %}">{% csrf_token %}
+        <div class="form-group">
+            <button type="submit" data-product_id="{{ product_image.product.id }}"
+                    data-product_name="{{ product_image.product.name }}" data-product_price="{{ product_image.product.price }}"
+                    class="main_submit_btn product-card-buy btn btn-warning">Добавить в корзину
+            </button>
+        </div>
+    </form>
 </div>

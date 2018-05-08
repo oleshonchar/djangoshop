@@ -11,6 +11,8 @@ def basket_adding(request):
     data = request.POST
     product_id = data.get('product_id')
     nmb = data.get('nmb')
+    if nmb is "":
+        nmb = 1
 
     new_product, created = ProductInBasket.objects.get_or_create(session_key=session_key, product_id=product_id, defaults={'nmb': nmb})
     if not created:
@@ -31,15 +33,18 @@ def checkout(request):
 
     form = CheckoutContactForm(request.POST or None)
     if request.POST:
-        print(request.POST)
         if form.is_valid():
-            print('yes')
             data = request.POST
             name = data['name']
             phone = data['phone']
+            email = data['email']
+            address = data['address']
+            comment = data['comment']
+
             user, created = User.objects.get_or_create(username=phone, defaults={'first_name': name})
 
-            order = Order.objects.create(user=user, customer_name=name, customer_phone=phone, status_id=1)
+            order = Order.objects.create(user=user, customer_name=name, customer_phone=phone, customer_email=email,
+                                         customer_address=address, comments=comment, status_id=1)
 
             for name, value in data.items():
                 if name.startswith('product_in_basket_'):
@@ -56,7 +61,15 @@ def checkout(request):
 
             ProductInBasket.objects.filter(session_key=session_key).delete()
 
-        else:
-            print('no')
-
     return render(request, 'orders/checkout.html', locals())
+
+def basket_deleting(request):
+    return_dict = dict()
+    session_key = request.session.session_key
+    data = request.POST
+
+    product_id = data.get('product_id')
+    ProductInBasket.objects.filter(session_key=session_key, product_id=product_id).delete()
+
+    return JsonResponse(return_dict)
+
